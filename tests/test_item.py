@@ -42,7 +42,7 @@ def test_name_too_long():
     item1.name = 'Смартфон'
     assert item1.name == 'Смартфон'
     """  на  длина наименования товара больше 10 символов
-    Exception: 'Длинаименования товара превышает 10 символов.'"""
+    Exception: ' Длина именования товара превышает 10 символов.'"""
     with pytest.raises(Exception):
         item1.name = 'СуперСмартфон'
 
@@ -58,7 +58,7 @@ def test_instantiate_from_csv():
 
 
 def test_string_to_number():
-    """проверка стаческого метода, который возвращает число из числа-строки """
+    """ Метод, который возвращает число из числа-строки """
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
