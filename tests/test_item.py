@@ -58,7 +58,8 @@ def test_instantiate_from_csv():
 
 
 def test_string_to_number():
-    """проверка стаческого метода, который возвращает число из числа-строки """assert Item.string_to_number('5') == 5
+    """проверка стаческого метода, который возвращает число из числа-строки """
+    assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
