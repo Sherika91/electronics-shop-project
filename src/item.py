@@ -26,6 +26,9 @@ class Item:
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
+    def __str__(self):
+        return f'{self.name}'
+
     @property
     def name(self):
         return self.__name
@@ -55,7 +58,7 @@ class Item:
 
         cls.all.clear()
         data_csv = os.path.join('../src/items.csv')
-        with open(data_csv, newline='', encoding='windows-1251') as file:
+        with open(data_csv, newline='', encoding='UTF-8') as file:
             csvreader = csv.DictReader(file)
 
             for row in csvreader:
