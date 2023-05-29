@@ -64,13 +64,11 @@ def test_string_to_number(_obj):
 
 
 def test__repr__(_obj):
-    item = _obj
-    assert item == _obj
+    assert repr(_obj) == "Item('Телефон', 10, 5)"
 
 
 def test__str__(_obj):
-    item = _obj
-    assert item.name == "Телефон"
+    assert str(_obj) == 'Телефон'
 
 
 if __name__ == "__main__":
