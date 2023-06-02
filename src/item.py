@@ -21,8 +21,6 @@ class Item:
         self.price = price
         self.quantity = quantity
 
-        Item.all.append(self)
-
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
@@ -55,14 +53,17 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
+        try:
+            cls.all.clear()
+            data_csv = os.path.join('../src/items.csv')
+            with open(data_csv, newline='', encoding='UTF-8') as file:
+                csvreader = csv.DictReader(file)
+                for row in csvreader:
+                    Item.all.append(cls(row['name'], row['price'], row['quantity']))
 
-        cls.all.clear()
-        data_csv = os.path.join('../src/items.csv')
-        with open(data_csv, newline='', encoding='UTF-8') as file:
-            csvreader = csv.DictReader(file)
+        except FileNotFoundError:
+            print("File not found.")
 
-            for row in csvreader:
-                cls(row['name'], row['price'], row['quantity'])
 
     @staticmethod
     def string_to_number(data):

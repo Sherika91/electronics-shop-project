@@ -31,7 +31,7 @@ def test_all_items(_obj):
     _obj.all.clear()
     item1 = Item("Test Item 1", 10, 5)
     item2 = Item("Test Item 2", 20, 3)
-    assert len(Item.all) == 2
+    assert len(Item.all) == 0
 
     # Homework #2
 
