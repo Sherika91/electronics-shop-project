@@ -27,6 +27,11 @@ class Item:
     def __str__(self):
         return f'{self.name}'
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return int(self.quantity) + int(other.quantity)
+
     @property
     def name(self):
         return self.__name
@@ -63,7 +68,6 @@ class Item:
 
         except FileNotFoundError:
             print("File not found.")
-
 
     @staticmethod
     def string_to_number(data):
