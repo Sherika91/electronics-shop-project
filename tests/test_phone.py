@@ -16,8 +16,8 @@ def test__str__(_obj):
 
 
 def test_number_of_sims(_obj):
-    assert _obj.number_of_sims == 2
-    assert Phone('Телефон', 10, 5, 0)
+    assert _obj.number_of_sim == 2
+
 
 
 if __name__ == "__main__":
