@@ -20,12 +20,13 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        super().__init__()
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.__name}'
 
     def __add__(self, other):
         if not isinstance(other, Item):
