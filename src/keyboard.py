@@ -23,7 +23,6 @@ class KeyBoard(Item, MixinLang):
 
     def __init__(self, name: str, price: int, quantity: int, language="EN") -> None:
         super().__init__(name, price, quantity)
-        self.__language = language
 
     def __repr__(self) -> str:
         return f"{Item.__name__}('{self.name}', {self.price}, {self.quantity})"
