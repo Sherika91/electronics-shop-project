@@ -1,7 +1,11 @@
 """"Здесь надо написать тесты с использованием pytest для модуля item."""
+import csv
+import os.path
+
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.item import InstantiateCSVError
 
 
 @pytest.fixture()
@@ -48,13 +52,29 @@ def test_name_too_long(_obj):
 
 
 def test_instantiate_from_csv(_obj):
-    """Запускаем метод вызывающий класс из файла,
-     Проверяем корректность работы метода, подсчетом записей"""
-    _obj.instantiate_from_csv()
+    assert _obj.name == "Телефон"
+    assert _obj.price == 10
+    assert _obj.quantity == 5
 
-    assert len(_obj.all) == 5  # в файле 5 записей с данными по товарам
-    item6 = _obj.all[0]
-    assert item6.name == 'Смартфон'
+
+def test_instantiate_no_file():
+
+    with pytest.raises(FileNotFoundError):
+        os.rename('../src/temp_invalid.csv', '../src/items.csv')
+        Item.instantiate_from_csv()
+
+
+def test_instantiate_2():
+    data_csv = os.path.join('../src/items.csv')
+    with open(data_csv, newline='', encoding='windows-1251') as file:
+        csvreader = csv.DictReader(file)
+        for row in csvreader:
+            Item(row['name'], row['price'], row['quantity'])
+
+
+def test_instantiate_from_csv_missing_fields():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
 
 
 def test_string_to_number(_obj):

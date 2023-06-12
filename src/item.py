@@ -2,6 +2,15 @@ import csv
 import os.path
 
 
+class InstantiateCSVError(Exception):
+
+    def __init__(self):
+        self.message = "Файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -64,11 +73,14 @@ class Item:
             data_csv = os.path.join('../src/items.csv')
             with open(data_csv, newline='', encoding='UTF-8') as file:
                 csvreader = csv.DictReader(file)
+                if len(csvreader.fieldnames) != 3:
+                    raise InstantiateCSVError()
+
                 for row in csvreader:
                     Item.all.append(cls(row['name'], row['price'], row['quantity']))
 
         except FileNotFoundError:
-            print("File not found.")
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
     @staticmethod
     def string_to_number(data):
